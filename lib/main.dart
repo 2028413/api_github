@@ -68,35 +68,46 @@ void getHttpListComplex(String nom) async{
         title: Text(widget.title),
       ),
       body: Center(
+
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            TextField(
-              controller: controller,
-              scrollPhysics: const NeverScrollableScrollPhysics(),
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
+            Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: TextField(
+          controller: controller,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(),
+          ),
+        ),
+      ),
+            Expanded(
+              child: SizedBox(
+                height: double.infinity,
+                width: 200.0,
+                child: new ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: trucs.length,
+                  itemBuilder: (context, int index){
+                    return Container(
+                        child: ListTile(
+                          tileColor: Colors.blueAccent,
+                          title: new Center(child: Text('Name : ' + trucs[index].name + ' ' + 'Private : ' + trucs[index].private.toString(), style: new TextStyle( fontWeight: FontWeight.w500, fontSize: 25.0),
+                          )
+                          ),
+                        )
+                    );
+                  }
               ),
-            ),
-            ListView.builder(
-              itemCount: trucs.length,
-              itemBuilder: (context, int index){
-                return Container(
-                  child: ListTile(
-                    tileColor: Colors.blueAccent,
-                    title: new Center(child: Text(trucs[index].name + trucs[index].private.toString(), style: new TextStyle( fontWeight: FontWeight.w500, fontSize: 25.0),
-                )
-                ),
-                )
-                );
-              }
-            ),
-          ],
+              ),
+            )
+
+    ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          getHttpListComplex('${controller.text}');
+          getHttpListComplex('2028413');//'${controller.text}'
         },
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
